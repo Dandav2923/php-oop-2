@@ -1,6 +1,6 @@
 <?php 
-
-class User 
+require_once __DIR__ . '/Product.php';
+class User extends Product
 {
     protected $userName;
     protected $userLastName;

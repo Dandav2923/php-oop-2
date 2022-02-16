@@ -11,9 +11,15 @@ class Product
 
     public function __construct($productName, $productType, $productPrice)
     {
-        $this->productName = $productName;
-        $this->productType = $productType;
-        $this->productPrice = $productPrice;
+        try {
+            $this->productName = $productName;
+            $this->productType = $productType;
+            $this->setProductPrice($productPrice);
+        } catch (\TypeError $error) {
+            throw new Exception($error->getMessage());
+            
+        }
+        
     }
     
 
@@ -50,8 +56,11 @@ class Product
      *
      * 
      */ 
-    public function setProductPrice($productPrice)
+    public function setProductPrice(float $productPrice)
     {
+        if($productPrice < 50){
+            throw new Exception("Prezzo troppo basso");
+        }
         $this->productPrice = $productPrice;
 
         return $this;
